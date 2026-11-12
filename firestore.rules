@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// Consertos da Lili — regras do Firestore
+// Só a conta da Eliani pode ler e gravar os dados.
+// (Para liberar outra pessoa, acrescente o e-mail dela na lista.)
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function autorizada() {
+      return request.auth != null
+        && request.auth.token.email in ['eliani@consertosdalili.app'];
+    }
+    match /{documento=**} {
+      allow read, write: if autorizada();
+    }
+  }
+}

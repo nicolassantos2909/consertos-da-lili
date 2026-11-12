@@ -1,0 +1,14 @@
+# Cache local do Firebase CLI
+.firebase/
+*.log
+firebase-debug*.log
+
+# Dependências (se algum dia houver)
+node_modules/
+
+# Configurações pessoais do Claude Code
+.claude/settings.local.json
+
+# Sistema
+Thumbs.db
+.DS_Store

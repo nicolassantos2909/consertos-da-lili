@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Consertos da Lili</title>
+  <meta name="description" content="Pedidos de costura da Lili: novos pedidos, entregas, pagamentos e clientes.">
+
+  <!-- PWA: permite "Adicionar à tela inicial" no celular -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0C6170">
+  <link rel="icon" href="icons/icone.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Lili">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Fontes: Fraunces (títulos) e Inter (texto) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+
+  <!-- ===================== CARREGANDO ===================== -->
+  <section id="tela-carregando" class="tela tela-centro">
+    <svg class="agulha agulha-balanco" viewBox="0 0 120 120" aria-hidden="true">
+      <use href="#svg-agulha"></use>
+    </svg>
+    <p id="carregando-texto" class="carregando-texto">Abrindo…</p>
+  </section>
+
+  <!-- ===================== BOAS-VINDAS ===================== -->
+  <section id="tela-inicio" class="tela" hidden>
+    <header class="topo">
+      <span class="topo-btn invisivel"></span>
+      <h1 class="topo-titulo">Boas-vindas</h1>
+      <span class="topo-btn invisivel"></span>
+    </header>
+    <main class="painel painel-solto">
+      <div class="card cartao-boas">
+        <h2 class="marca">Consertos<br>da Lili</h2>
+        <svg class="agulha" viewBox="0 0 120 120" role="img" aria-label="Agulha e linha">
+          <use href="#svg-agulha"></use>
+        </svg>
+        <p class="frase">Seus pedidos de costura organizados, num toque só. 🧵</p>
+        <button type="button" class="btn btn-rosa btn-grande" data-acao="comecar">Começar</button>
+      </div>
+    </main>
+  </section>
+
+  <!-- ===================== LOGIN ===================== -->
+  <section id="tela-login" class="tela" hidden>
+    <header class="topo">
+      <button type="button" class="topo-btn" data-acao="voltar-inicio" aria-label="Voltar">‹</button>
+      <h1 class="topo-titulo">Entrar</h1>
+      <span class="topo-btn invisivel"></span>
+    </header>
+    <main class="painel painel-solto">
+      <form id="form-login" class="card cartao-login" novalidate>
+        <h2 class="marca marca-p">Consertos da Lili</h2>
+        <div class="campo">
+          <label for="login-usuario">Usuário</label>
+          <input id="login-usuario" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false">
+        </div>
+        <div class="campo">
+          <label for="login-senha">Senha</label>
+          <div class="senha-caixa">
+            <input id="login-senha" type="password" autocomplete="current-password">
+            <button type="button" class="btn-olho" data-acao="ver-senha">Mostrar</button>
+          </div>
+        </div>
+        <p id="login-erro" class="erro" role="alert" hidden></p>
+        <button id="btn-entrar" type="submit" class="btn btn-rosa btn-grande">Entrar</button>
+        <p id="aviso-demo" class="aviso-demo" hidden>
+          🧪 <strong>Modo demonstração</strong><br>Usuário: <strong>lili</strong> · Senha: <strong>1234</strong>
+        </p>
+      </form>
+    </main>
+  </section>
+
+  <!-- ===================== APP (depois do login) ===================== -->
+  <section id="tela-app" class="tela" hidden>
+    <header class="topo">
+      <button type="button" id="btn-voltar" class="topo-btn invisivel" data-acao="voltar" aria-label="Voltar">‹</button>
+      <h1 id="topo-titulo" class="topo-titulo">Pedidos</h1>
+      <button type="button" id="btn-config" class="topo-btn" data-acao="abrir-config" aria-label="Configurações">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+    </header>
+
+    <!-- O conteúdo de cada aba é desenhado aqui pelo app.js -->
+    <main id="conteudo" class="painel"></main>
+
+    <!-- Menu inferior fixo -->
+    <nav class="nav" aria-label="Menu principal">
+      <div class="nav-dentro">
+        <button type="button" class="nav-item" data-acao="ir" data-aba="novo">
+          <span class="nav-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></span>
+          Novo pedido
+        </button>
+        <button type="button" class="nav-item" data-acao="ir" data-aba="pedidos">
+          <span class="nav-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 2.8h6v3H9zM9 11h6M9 15h6"/></svg></span>
+          Pedidos
+        </button>
+        <button type="button" class="nav-item" data-acao="ir" data-aba="clientes">
+          <span class="nav-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.6a3.5 3.5 0 0 1 0 6.8M17.5 14.8c2 .7 3.4 2.4 4 5.2"/></svg></span>
+          Clientes
+        </button>
+        <button type="button" class="nav-item" data-acao="ir" data-aba="resumo">
+          <span class="nav-icone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h9l4 4v12H6z"/><path d="M14.5 4v4.5H19M9.5 17v-3M12.5 17v-5M15.5 17v-2"/></svg></span>
+          Resumo
+        </button>
+      </div>
+    </nav>
+  </section>
+
+  <!-- Painel que sobe de baixo (detalhes de pedido, cliente, serviço) -->
+  <div id="folha" class="folha-fundo" hidden></div>
+  <!-- Perguntas de confirmação -->
+  <div id="dialogo" class="dialogo-fundo" hidden></div>
+  <!-- Avisos rápidos ("Mensagem copiada! ✅") -->
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- Desenho da agulha com linha, reaproveitado nas telas -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="svg-agulha" viewBox="0 0 120 120">
+      <path d="M26 98 L87.7 18.1 Q92.5 15.5 92.3 21.9 Z" fill="none" stroke="#0C6170" stroke-width="2.4" stroke-linejoin="round"/>
+      <ellipse cx="84.6" cy="26.6" rx="1.3" ry="4.2" transform="rotate(39.3 84.6 26.6)" fill="none" stroke="#0C6170" stroke-width="1.8"/>
+      <path d="M84.6 26.6 C101 34 97 53 78 55 C57 57 50 76 65 85 C78 92 75 106 59 105 C49 104 44 98 44 92" fill="none" stroke="#FF4FA3" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+</body>
+</html>
